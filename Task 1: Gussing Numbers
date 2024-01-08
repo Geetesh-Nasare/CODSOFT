@@ -1,0 +1,37 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+
+int generateRandomNumber(int lower, int upper) {
+    return (rand() % (upper - lower + 1)) + lower;
+}
+
+int getUserGuess() {
+    int guess;
+    std::cout << "Guess the number: ";
+    std::cin >> guess;
+    return guess;
+}
+
+void playGame() {
+    srand(time(0));
+    int randomNumber = generateRandomNumber(1, 100);
+    int userGuess = 0;
+
+    while (userGuess != randomNumber) {
+        userGuess = getUserGuess();
+
+        if (userGuess < randomNumber) {
+            std::cout << "Too low! Try again." << std::endl;
+        } else if (userGuess > randomNumber) {
+            std::cout << "Too high! Try again." << std::endl;
+        } else {
+            std::cout << "Congratulations! You guessed the correct number." << std::endl;
+        }
+    }
+}
+
+int main() {
+    playGame();
+    return 0;
+}
