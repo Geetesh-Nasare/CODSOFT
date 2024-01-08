@@ -1,0 +1,62 @@
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b == 0) {
+        throw std::runtime_error("Division by zero is not allowed.");
+    }
+    return a / b;
+}
+
+int main() {
+    using namespace std;
+
+    double num1, num2;
+    string operation;
+
+    cout << "Enter the first number: ";
+    cin >> num1;
+
+    cout << "Enter the second number: ";
+    cin >> num2;
+
+    cout << "Choose an operation (+, -, *, /): ";
+    cin >> operation;
+
+    double result;
+
+    if (operation == "+") {
+        result = add(num1, num2);
+    } else if (operation == "-") {
+        result = subtract(num1, num2);
+    } else if (operation == "*") {
+        result = multiply(num1, num2);
+    } else if (operation == "/") {
+        try {
+            result = divide(num1, num2);
+        } catch (const runtime_error &e) {
+            cerr << e.what() << endl;
+            return 1;
+        }
+    } else {
+        cerr << "Unknown operation. Please enter +, -, *, or /." << endl;
+        return 1;
+    }
+
+    cout << "The result is: " << result << endl;
+
+    return 0;
+}
