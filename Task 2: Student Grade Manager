@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+class Student {
+public:
+    std::string name;
+    int grade;
+
+    Student(std::string name, int grade) {
+        this->name = name;
+        this->grade = grade;
+    }
+};
+
+int getStudentGrade(std::string name) {
+    int grade;
+    std::cout << "Enter the grade for " << name << ": ";
+    std::cin >> grade;
+    return grade;
+}
+
+double calculateAverageGrade(std::vector<Student> students) {
+    int totalGrade = 0;
+    for (int i = 0; i < students.size(); i++) {
+        totalGrade += students[i].grade;
+    }
+    return (double)totalGrade / students.size();
+}
+
+int findHighestGrade(std::vector<Student> students) {
+    int highestGrade = students[0].grade;
+    for (int i = 1; i < students.size(); i++) {
+        if (students[i].grade > highestGrade) {
+            highestGrade = students[i].grade;
+        }
+    }
+    return highestGrade;
+}
+
+int findLowestGrade(std::vector<Student> students) {
+    int lowestGrade = students[0].grade;
+    for (int i = 1; i < students.size(); i++) {
+        if (students[i].grade < lowestGrade) {
+            lowestGrade = students[i].grade;
+        }
+    }
+    return lowestGrade;
+}
+
+int main() {
+    std::vector<Student> students;
+    int numStudents;
+    std::cout << "Enter the number of students: ";
+    std::cin >> numStudents;
+
+    for (int i = 0; i < numStudents; i++) {
+        std::string name;
+        std::cout << "Enter the name of student " << i + 1 << ": ";
+        std::cin >> name;
+        int grade = getStudentGrade(name);
+        students.push_back(Student(name, grade));
+    }
+
+    double averageGrade = calculateAverageGrade(students);
+    int highestGrade = findHighestGrade(students);
+    int lowestGrade = findLowestGrade(students);
+
+    std::cout << "Average grade: " << averageGrade << std::endl;
+    std::cout << "Highest grade: " << highestGrade << std::endl;
+    std::cout << "Lowest grade: " << lowestGrade << std::endl;
+
+    return 0;
+}
